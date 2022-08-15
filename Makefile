@@ -12,3 +12,11 @@ makemigrations:
 	cd website && python manage.py migrate
 admin:
 	cd website && python manage.py createsuperuser
+format:
+	black *.py mylib/*.py
+lint:
+	pylint --disable=R,C *.py mylib/*.py
+build:
+	docker compose build
+up:
+	docker-compose up -d
