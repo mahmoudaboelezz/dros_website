@@ -20,12 +20,12 @@ jobs:
     - name: Install Dependencies
       run: |
         make install
-    - name: Lint with pylint
-      run: |
-        make lint
     - name: Format code
       run: |
         make format
+    - name: Lint with pylint
+      run: |
+        make lint
     - name: Build Container
       run: |
         make build

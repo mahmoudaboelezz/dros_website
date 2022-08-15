@@ -12,9 +12,9 @@ makemigrations:
 admin:
 	cd website && python manage.py createsuperuser
 format:
-	black *.py mylib/*.py
+	black *.py website/*.py
 lint:
-	pylint --disable=R,C *.py mylib/*.py
+	pylint --disable=R,C *.py website/*.py
 build:
 	docker compose build
 up:
