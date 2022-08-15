@@ -1,6 +1,5 @@
 install:
 	pip install -r requirements.txt
-	poetry install
 freeze:
 	pip list --format=freeze > requirements.txt
 migrate:
