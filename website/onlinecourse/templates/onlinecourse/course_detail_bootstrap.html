@@ -51,7 +51,18 @@
                     <h5>Lesson {{lesson.order|add:1}}: {{lesson.title}}</h5>
                 </div>
                 <div class="card-body">{{lesson.content}}</div>
+                {{lesson.embded_video}}
+
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <iframe width="800" height="416" src="{{lesson.video_link}}" title="{{lesson.video_title}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+
             </div>
+            
             <!-- Task: show questions and choices -->
             <!-- <HINT> Use Bootstrap 4 Collapse to hide exam first, more details could be found here-->
             {% if user.is_authenticated %}

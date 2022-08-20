@@ -77,6 +77,10 @@ class Lesson(models.Model):
     order = models.IntegerField(default=0)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     content = models.TextField()
+    embded_video = models.BooleanField(default=False)
+    video_link = models.URLField(null=True)
+    video_title = models.CharField(max_length=200, default="title")
+    
 
     def __str__(self) -> str:
         return self.title
@@ -157,4 +161,13 @@ class Choice(models.Model):
 class Submission(models.Model):
     enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
     choices = models.ManyToManyField(Choice)
+    # get the score of the submission
+    def get_score(self):
+        score = 0
+        for choice in self.choices.all():
+            if choice.is_correct:
+                score += choice.question.grade
+        return score
+    def __str__(self):
+        return f'{self.enrollment.user.username} submitted in {self.enrollment.course.name}'
 #    Other fields and methods you would like to design

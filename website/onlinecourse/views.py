@@ -1,5 +1,6 @@
 from email import message
 from multiprocessing import context
+import re
 from django.db.models.enums import Choices
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -78,11 +79,14 @@ def check_if_can_join(user, course):
     can_join = False
     if user.id is not None:
         # Check if user enrolled
-        learner = Learner.objects.get(user=user)
-        if course in learner.can_join_only.all():
-            print(learner,course)
+        if user.is_superuser:
             can_join = True
-    print(can_join)
+             
+        learner = Learner.objects.get(user=user)
+        if learner:
+            if course in learner.can_join_only.all():
+                can_join = True
+        
     return can_join
 
 # CourseListView
@@ -102,32 +106,42 @@ def CourseListView(request):
     courses = Course.objects.order_by('-total_enrollment')[:10]
     
     for course in courses:
+        if not request.user.is_authenticated:
+            for course in courses:
+                course.is_enrolled = False
         if request.user.is_authenticated:
             course.is_enrolled = check_if_enrolled(request.user, course)
-            can_join = check_if_can_join(request.user, course)
-            if can_join:
-                course.can_join = True
-            else:
-                course.can_join = False
+            try: 
+                can_join = check_if_can_join(request.user, course)
+                if can_join:
+                    course.can_join = True
+                else:
+                    course.can_join = False
+            except:
+                if not request.user.is_authenticated:
+                    return redirect('onlinecourse:registration')
     return render(request, 'onlinecourse/course_list_bootstrap.html', {'course_list': courses})
 
 
 def CourseDetailView(request, pk):
     course = get_object_or_404(Course, pk=pk)
     user = request.user
+    if user.is_superuser:
+        return render(request, 'onlinecourse/course_detail_bootstrap.html', {'course': course})
+    if not user.is_authenticated and not check_if_can_join(user, course):
+        return redirect('onlinecourse:registration')
     is_enrolled = check_if_enrolled(user, course)
     can_join = check_if_can_join(request.user, course)
-    if not is_enrolled and user.is_authenticated and can_join:
-        # Create an enrollment
-        Enrollment.objects.create(user=user, course=course, mode='honor')
-        course.total_enrollment += 1
-        course.save()
+    
+    if  is_enrolled  and can_join:
         return render(request, 'onlinecourse/course_detail_bootstrap.html', {'course': course})
     if not is_enrolled:
         messages.info(request, 'You are not enrolled in this course.')
+        return redirect('onlinecourse:index')
     if not can_join:
         messages.info(request, 'You can only join this course if you have a subscription.')
-    return redirect('onlinecourse:index')
+        return redirect('onlinecourse:index')
+    return render(request, 'onlinecourse/course_detail_bootstrap.html', {'course': course})
     
 
 
@@ -135,18 +149,22 @@ def enroll(request, course_id):
     courses = Course.objects.order_by('-total_enrollment')[:10]
     course = get_object_or_404(Course, pk=course_id)
     user = request.user
-
+    # if admin 
+    if user.is_superuser:
+        return redirect('onlinecourse:course_details', course_id=course.id)
+    if not user.is_authenticated and not check_if_can_join(user, course):
+        return redirect('onlinecourse:registration')
     is_enrolled = check_if_enrolled(user, course)
     can_join = check_if_can_join(request.user, course)
-    print(can_join)
-    if not is_enrolled and user.is_authenticated and can_join:
+    if  not is_enrolled and user.is_authenticated and can_join:
         # Create an enrollment
         Enrollment.objects.create(user=user, course=course, mode='honor')
         course.total_enrollment += 1
         course.save()
-        return HttpResponseRedirect(reverse(viewname='onlinecourse:course_details', args=(course.id,)))
+        messages.info(request, 'You have enrolled')
     if is_enrolled:
-        messages.info(request, 'You are already enrolled in this course.')
+        
+        return HttpResponseRedirect(reverse(viewname='onlinecourse:course_details', args=(course.id,)))
     if not can_join:
         messages.info(request, 'You can only join this course if you have a subscription.')
     return redirect('onlinecourse:index')
@@ -221,6 +239,4 @@ def show_exam_result(request, course_id, lesson_id, submission_id):
 
 
     
-
-
 

@@ -5,7 +5,7 @@ freeze:
 migrate:
 	cd website && python manage.py migrate
 run:
-	cd website && python manage.py runserver
+	cd website && python manage.py runserver 8090
 makemigrations:
 	cd website && python manage.py makemigrations
 	cd website && python manage.py migrate

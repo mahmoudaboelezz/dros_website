@@ -27,7 +27,8 @@ SECRET_KEY = 'aay0j_9b&ky3a7(8m8il+-1ud(scw12@w5!+5-=gsk6ynzi0ls'
 DEBUG = True
 
 # <HINT> add your cloud host here
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aboelezz.com','https://aboelezz.com/','127.0.0.1','localhost']
+CSRF_TRUSTED_ORIGINS = ['https://aboelezz.com','https://udemy.aboelezz.com']
 
 
 # Application definition
