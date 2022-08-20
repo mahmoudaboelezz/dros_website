@@ -28,10 +28,10 @@ jobs:
         make lint
     - name: Build Container
       run: |
-        make build
+        #make build
     - name: Run Container
       run: |
-        make up
+        #make up
     - name: Run website
       run: |
         make makemigrations && make run
