@@ -5,7 +5,7 @@ from django.db.models.enums import Choices
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 # <HINT> Import any new Models here
-from .models import Course, Enrollment, Lesson, Question, Choice, Submission,Learner
+from .models import Course, Enrollment, Instructor, Lesson, Question, Choice, Submission,Learner
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
@@ -106,6 +106,11 @@ def CourseListView(request):
     courses = Course.objects.order_by('-total_enrollment')[:10]
     
     for course in courses:
+        
+        # for instructor in course.instructors.all():
+        #     course.instructor_name = instructor.user.first_name + " " + instructor.user.last_name
+        # print(instructor.profile_picture)
+        print(course.instructor)
         if not request.user.is_authenticated:
             for course in courses:
                 course.is_enrolled = False
@@ -120,7 +125,7 @@ def CourseListView(request):
             except:
                 if not request.user.is_authenticated:
                     return redirect('onlinecourse:registration')
-    return render(request, 'onlinecourse/course_list_bootstrap.html', {'course_list': courses})
+    return render(request, 'onlinecourse/course_list_bootstrap.html', {'course_list': courses,})
 
 
 def CourseDetailView(request, pk):
@@ -240,3 +245,5 @@ def show_exam_result(request, course_id, lesson_id, submission_id):
 
     
 
+a = ' asdsA'
+a.lower()

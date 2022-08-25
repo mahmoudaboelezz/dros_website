@@ -91,6 +91,11 @@ body {
     float: right;
 }
 
+.col.courses{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .column {
   float: left;

@@ -1,3 +1,5 @@
+venv:
+	.\venv\Scripts\activate
 install:
 	pip install -r requirements.txt
 freeze:

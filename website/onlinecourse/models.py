@@ -1,3 +1,4 @@
+from email.mime import image
 import sys
 from django.utils.timezone import now
 try:
@@ -18,7 +19,7 @@ class Instructor(models.Model):
     )
     full_time = models.BooleanField(default=True)
     total_learners = models.IntegerField()
-
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True)
     def __str__(self):
         return self.user.username
 
@@ -27,7 +28,7 @@ class Course(models.Model):
     image = models.ImageField(upload_to='course_images/')
     description = models.CharField(max_length=1000)
     pub_date = models.DateField(null=True)
-    instructors = models.ManyToManyField(Instructor)
+    instructor = models.ForeignKey(Instructor,on_delete=models.CASCADE,default='1')
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Enrollment')
     total_enrollment = models.IntegerField(default=0)
     is_enrolled = False
@@ -78,7 +79,7 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     content = models.TextField()
     embded_video = models.BooleanField(default=False)
-    video_link = models.URLField(null=True)
+    video_link = models.URLField(null=True, blank=True)
     video_title = models.CharField(max_length=200, default="title")
     
 
