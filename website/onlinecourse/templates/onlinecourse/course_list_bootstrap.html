@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/course.css' %}">
-    <meta charset="UTF-8">
-    <title>Online Courses</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
     <!-- Navigation bar -->
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
@@ -78,7 +70,7 @@
                 {% endfor %}
             </div> {% endcomment %}
 
-            <div class="row items">
+            <div class="row items" v-if="seen" id='app'>
                 {% for course in course_list %}
                 
             
@@ -109,7 +101,7 @@
                                   <p>{{can_join}}</p>
                                 {% else %}
                                 {% endif %}
-                                <input class="btn btn-primary"  type="submit"
+                                <input class="btn btn-primary"  type="submit" style="position: absolute;"
                                        value="{% if course.is_enrolled %}Enter{% else %}{% if course.can_join %}Enroll{% else %}You can't Enroll{% endif %}{% endif %} ">
                           </form> </div>
                     </div>
@@ -120,5 +112,37 @@
     {% else %}
         <p>No courses are available.</p>
     {% endif %}
-</body>
-</html>
+
+
+    <div id="app-4">
+        <ol>
+                
+              <li v-for="course in courses">
+                <a v-bind:href="course.url">[[ course.name ]]</a>
+              </li>
+        </ol>
+      </div>
+
+    <script>
+        var courses = {{ items|safe }};
+        var app = new Vue({ 
+            el: '#app',
+            data: {
+                seen : true
+            }
+            });
+
+
+
+
+            var app4 = new Vue({
+                delimiters: ['[[', ']]'],
+                el: '#app-4',
+                data: {
+                    
+                    courses: courses,
+                },
+                
+              });
+    </script>
+    {% endblock content %}

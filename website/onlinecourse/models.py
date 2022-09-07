@@ -1,4 +1,4 @@
-from email.mime import image
+
 import sys
 from django.utils.timezone import now
 try:
@@ -8,6 +8,7 @@ except Exception:
     sys.exit()
 
 from django.conf import settings
+from django.urls import reverse
 import uuid
 
 
@@ -37,7 +38,8 @@ class Course(models.Model):
     def __str__(self):
         return "Name: " + self.name + "," + \
                "Description: " + self.description
-
+    def get_absolute_url(self):
+        return reverse('onlinecourse:course_details', args=[str(self.id)])
 
 # Learner model
 class Learner(models.Model):
@@ -80,28 +82,31 @@ class Lesson(models.Model):
     content = models.TextField()
     embded_video = models.BooleanField(default=False)
     video_link = models.URLField(null=True, blank=True)
-    video_title = models.CharField(max_length=200, default="title")
+    video_title = models.CharField(max_length=200, default="title", blank=True)
+    demo = models.BooleanField(default=False)
     
 
     def __str__(self) -> str:
-        return self.title
+        return f'{self.title} - {self.course.name} - {self.demo}'
 
 # Enrollment model
 # <HINT> Once a user enrolled a class, an enrollment entry should be created between the user and course
 # And we could use the enrollment to track information such as exam submissions
 class Enrollment(models.Model):
-    AUDIT = 'audit'
-    HONOR = 'honor'
-    BETA = 'BETA'
-    COURSE_MODES = [
-        (AUDIT, 'Audit'),
-        (HONOR, 'Honor'),
-        (BETA, 'BETA')
+    student = 'student'
+    assistant = 'assistant'
+    manager = 'manager'
+    roles = [
+        (student, 'student'),
+        (assistant, 'assistant'),
+        (manager, 'manager'),
+        
     ]
+    
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     date_enrolled = models.DateField(default=now)
-    mode = models.CharField(max_length=5, choices=COURSE_MODES, default=AUDIT)
+    role = models.CharField(max_length=10, choices=roles, default=student)
     rating = models.FloatField(default=5.0)
     def __str__(self):
         return f'{self.user.username} enrolled in {self.course.name}'
@@ -141,12 +146,7 @@ class Question(models.Model):
 
         
 
-#  <HINT> Create a Choice Model with:
-    # Used to persist choice content for a question
-    # One-To-Many (or Many-To-Many if you want to reuse choices) relationship with Question
-    # Choice content
-    # Indicate if this choice of the question is a correct one or not
-    # Other fields and methods you would like to design
+
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.TextField(max_length=300)
@@ -162,13 +162,24 @@ class Choice(models.Model):
 class Submission(models.Model):
     enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
     choices = models.ManyToManyField(Choice)
+    score = models.IntegerField(default=0)
     # get the score of the submission
     def get_score(self):
         score = 0
         for choice in self.choices.all():
             if choice.is_correct:
                 score += choice.question.grade
+        self.score = score
         return score
+    
+    
+    
     def __str__(self):
-        return f'{self.enrollment.user.username} submitted in {self.enrollment.course.name}'
+        return f'{self.enrollment.user.username} submitted in {self.enrollment.course.name} with score {self.score}' 
 #    Other fields and methods you would like to design
+
+class Number_of_Submission(models.Model):
+    enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
+    number_of_submission = models.IntegerField(default=0)
+    def __str__(self):
+        return f'{self.enrollment.user.username} submitted in {self.enrollment.course.name} with number of submission {self.number_of_submission}'

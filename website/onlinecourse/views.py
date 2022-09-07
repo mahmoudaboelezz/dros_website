@@ -1,11 +1,13 @@
 from email import message
+import json
 from multiprocessing import context
+import random
 import re
 from django.db.models.enums import Choices
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 # <HINT> Import any new Models here
-from .models import Course, Enrollment, Instructor, Lesson, Question, Choice, Submission,Learner
+from .models import Course, Enrollment, Instructor, Lesson, Question, Choice, Submission,Learner,Number_of_Submission
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
@@ -104,6 +106,22 @@ def check_if_can_join(user, course):
 #         return courses
 def CourseListView(request):
     courses = Course.objects.order_by('-total_enrollment')[:10]
+
+    items = []
+    for i in range(len(courses)):
+        course = courses[i]
+        if request.user.is_authenticated:
+            course.is_enrolled = check_if_enrolled(request.user, course)
+        print(course.name, course.description)
+        items.append({'name': course.name,
+                      'description': course.description,
+                      'is_enrolled': course.is_enrolled,
+                      'id': course.id})
+
+    context = {}
+    items = json.dumps(items)
+    context["items"] = items
+    
     
     for course in courses:
         
@@ -125,7 +143,7 @@ def CourseListView(request):
             except:
                 if not request.user.is_authenticated:
                     return redirect('onlinecourse:registration')
-    return render(request, 'onlinecourse/course_list_bootstrap.html', {'course_list': courses,})
+    return render(request, 'onlinecourse/course_list_bootstrap.html', {'course_list': courses, 'items': items})
 
 
 def CourseDetailView(request, pk):
@@ -139,13 +157,25 @@ def CourseDetailView(request, pk):
     can_join = check_if_can_join(request.user, course)
     
     if  is_enrolled  and can_join:
+        # get all demo lessons
+        lessons = Lesson.objects.filter(course=course, demo=True)
+        print(course.lesson_set.all().filter(demo=True))
+        
+        # check 
         return render(request, 'onlinecourse/course_detail_bootstrap.html', {'course': course})
-    if not is_enrolled:
-        messages.info(request, 'You are not enrolled in this course.')
-        return redirect('onlinecourse:index')
+    
+    
+    
+    
+    # if not is_enrolled:
+    #     messages.info(request, 'You are not enrolled in this course.')
+    #     return redirect('onlinecourse:index')
     if not can_join:
-        messages.info(request, 'You can only join this course if you have a subscription.')
-        return redirect('onlinecourse:index')
+        # show all demo lessons of this course
+        lessons = Lesson.objects.filter(course=course, demo=True)
+        # return only demo lessons
+        return render(request, 'onlinecourse/course_detail_bootstrap.html', {'course': course, 'lessons': lessons})
+
     return render(request, 'onlinecourse/course_detail_bootstrap.html', {'course': course})
     
 
@@ -163,7 +193,7 @@ def enroll(request, course_id):
     can_join = check_if_can_join(request.user, course)
     if  not is_enrolled and user.is_authenticated and can_join:
         # Create an enrollment
-        Enrollment.objects.create(user=user, course=course, mode='honor')
+        Enrollment.objects.create(user=user, course=course, role='student')
         course.total_enrollment += 1
         course.save()
         messages.info(request, 'You have enrolled')
@@ -171,7 +201,8 @@ def enroll(request, course_id):
         
         return HttpResponseRedirect(reverse(viewname='onlinecourse:course_details', args=(course.id,)))
     if not can_join:
-        messages.info(request, 'You can only join this course if you have a subscription.')
+        return HttpResponseRedirect(reverse(viewname='onlinecourse:course_details', args=(course.id,)))
+        # messages.info(request, 'You can only join this course if you have a subscription.')
     return redirect('onlinecourse:index')
     
 
@@ -185,11 +216,14 @@ def enroll(request, course_id):
          # Redirect to show_exam_result with the submission id
 def submit(request, course_id, lesson_id):
     user = request.user
-    course = Course.objects.get(pk=course_id)
+    course = get_object_or_404(Course, pk=course_id)
     lesson = Lesson.objects.get(pk=lesson_id)
     enrollment = Enrollment.objects.get(user=user, course=course)
+    # prevent user from submitting exam more than 3 times
+    if enrollment.submission_set.count() >= 3:
+        messages.info(request, 'You have already submitted the exam 3 times.')
+        return redirect(course.get_absolute_url())
     submission = Submission.objects.create(enrollment=enrollment)
-
     selected_choices = extract_answers(request)
     submission.choices.set(selected_choices)
 
@@ -233,6 +267,8 @@ def show_exam_result(request, course_id, lesson_id, submission_id):
             total_score += question.grade   
 
     final_score = round((total_score/full_score)*100)
+    submission.score = final_score
+    submission.save()
     
     context = {
         'course' : course,
@@ -245,5 +281,6 @@ def show_exam_result(request, course_id, lesson_id, submission_id):
 
     
 
-a = ' asdsA'
-a.lower()
+
+# def calendar(request):
+#     # get

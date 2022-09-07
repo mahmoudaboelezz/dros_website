@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 
     <!-- Navigation bar -->
     <nav class="navbar navbar-light bg-light">
@@ -56,9 +50,11 @@
                     {{ message }}
                 </div>
                 {% endif %}
+                <br>
                 <button class="btn btn-primary" type="submit">Sign up</button> <!--Style button with .btn and .btn-primary class -->
             </div>
         </div>
     </form>
 
-</body>
+
+    {% endblock content %}
