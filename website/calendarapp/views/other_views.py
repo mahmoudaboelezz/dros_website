@@ -18,6 +18,10 @@ from calendarapp.forms import EventForm, AddMemberForm
 from newsletter.models import Newsletter,QRCode
 from accounts.models import User
 from django.utils.translation import gettext_lazy as _
+from django.template.loader import render_to_string
+from django.core import mail
+from django.utils.html import strip_tags
+
 def get_date(req_day):
     if req_day:
         year, month = (int(x) for x in req_day.split("-"))
@@ -67,17 +71,9 @@ class CalendarView(LoginRequiredMixin, generic.ListView):
         html_cal = html_cal.replace("Sat","السبت")
         html_cal = html_cal.replace("Sun","الاحد")
         print(html_cal)
-        from django.template.loader import render_to_string
-        from django.core import mail
-        from django.utils.html import strip_tags
+     
         
-        mail.send_mail(
-            subject='Order  has not been completed , ',
-            message= 'Order  has not been completed dsadsad, ',
-            from_email = f'{settings.EMAIL_SENDGRID}',
-            recipient_list=['mahmoudaboelezz51@gmail.com'],
-            fail_silently=False,
-        )
+        
         
         context["calendar"] = mark_safe(_(html_cal))
         context["prev_month"] = prev_month(d)
@@ -200,14 +196,28 @@ def member_join(request, event_id):
     c_qr = code.image.url
     print(c_qr)
     email = request.user.email
-    schedule_messages(
-        # EmailHtmlMessage("تم الإشتراك بنجاح" ,f'<html><head></head><body>{event} \n {code.qr_code} \n <b></b></body></html>',),recipients('smtp', email),
+    context = {
+        "event": event,
+        "user": request.user,
+        "verfication_code": v_c,
+        "code_link": c_l,
+        "qr_code": c_qr,
+        "name" : request.user.username,
+    }
+    subject = 'شكرا للأشتراك'
+    html_message = render_to_string('sitemessages/messages/my_message.html', context)
+    plain_message = strip_tags(html_message)
+    from_email = f'{settings.EMAIL_SENDGRID}'
+    to = f'{email}'       
+    mail.send_mail(subject, plain_message, from_email, [to,], html_message=html_message)
+    # schedule_messages(
+    #     # EmailHtmlMessage("تم الإشتراك بنجاح" ,f'<html><head></head><body>{event} \n {code.qr_code} \n <b></b></body></html>',),recipients('smtp', email),
         
-        EmailHtmlMessage("تم الإشتراك بنجاح",{'event':f'{event}','user':f'{request.user}','code':f'{code}','c_l':f'{c_l}','v_c':f'{v_c}','c_qr':f'{c_qr}',}
-                         , 'sitemessages/messages/my_message.html'),recipients('smtp', email),
-        # EmailHtmlMessage("تم الإشتراك بنجاح" ,mail),recipients('smtp', email),
-        sender=User.objects.get(id=1)
-    )
+    #     EmailHtmlMessage("تم الإشتراك بنجاح",{'event':f'{event}','user':f'{request.user}','code':f'{code}','c_l':f'{c_l}','v_c':f'{v_c}','c_qr':f'{c_qr}',}
+    #                      , 'sitemessages/messages/my_message.html'),recipients('smtp', email),
+    #     # EmailHtmlMessage("تم الإشتراك بنجاح" ,mail),recipients('smtp', email),
+    #     sender=User.objects.get(id=1)
+    # )
     
 
     import os
@@ -215,6 +225,7 @@ def member_join(request, event_id):
     EventMember.objects.create(event=event, user=request.user)
     Newsletter.objects.create(user=request.user, email=request.user.email, name=request.user.username)
     # schedule_email(message=f'تم تسجيلك في دورة {event.title} بنجاح', email=email,sender=User.objects.get(id=1))
+    messages.success(request, " تم الإشتراك بنجاح يرجي تفقد البريد الإلكتروني ويمكن أن يكون في البريد الغير مرغوب فيه أو الرسائل الأعلانية")
     return redirect(event.get_absolute_url())
     # generate qr code
     
