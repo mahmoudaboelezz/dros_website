@@ -32,6 +32,14 @@ class MyMessage(MessageBase):
 register_message_types(MyMessage)
     
 register_messenger_objects(
+#     SMTPMessenger(
+#         'admin@aboelezz.com',
+#         '1083b044e1620499d7de434658c225a9',
+#         '74c4918ed8e36914467e19c403021e3b',
+#         'in-v3.mailjet.com',
+#         '465',
+#         use_tls=True,
+# )
     SMTPMessenger(
         'admin@aboelezz.com',
         'apikey',
@@ -40,5 +48,6 @@ register_messenger_objects(
         '465',
         use_ssl=True,
 )
-)
+)# #Smtp Email for recovery password
+
 

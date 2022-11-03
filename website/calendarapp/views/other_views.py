@@ -1,5 +1,6 @@
 # cal/views.py
 
+from django.conf import settings
 from django.shortcuts import render, redirect,HttpResponse
 from django.http import HttpResponseRedirect
 from django.views import generic
@@ -66,6 +67,18 @@ class CalendarView(LoginRequiredMixin, generic.ListView):
         html_cal = html_cal.replace("Sat","السبت")
         html_cal = html_cal.replace("Sun","الاحد")
         print(html_cal)
+        from django.template.loader import render_to_string
+        from django.core import mail
+        from django.utils.html import strip_tags
+        
+        mail.send_mail(
+            subject='Order  has not been completed , ',
+            message= 'Order  has not been completed dsadsad, ',
+            from_email = f'{settings.EMAIL_SENDGRID}',
+            recipient_list=['mahmoudaboelezz51@gmail.com'],
+            fail_silently=False,
+        )
+        
         context["calendar"] = mark_safe(_(html_cal))
         context["prev_month"] = prev_month(d)
         context["next_month"] = next_month(d)

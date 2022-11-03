@@ -190,3 +190,29 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
+
+# EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+# # SENDGRID_API_KEY = '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'
+# SENDGRID_API_KEY = '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'
+# SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+# EMAIL_SENDGRID = "admin@aboelezz.com"
+
+# Smtp Email for recovery password
+# EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+# SENDGRID_API_KEY = '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'
+# SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+# EMAIL_SENDGRID = "egblack2030@gmail.com"
+
+# '1083b044e1620499d7de434658c225a9',
+#         '74c4918ed8e36914467e19c403021e3b',
+#         'in-v3.mailjet.com',
+
+EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
+EMAIL_HOST = 'in-v3.mailjet.com'
+MAILJET_API_KEY = "1083b044e1620499d7de434658c225a9"
+MAILJET_API_SECRET = "74c4918ed8e36914467e19c403021e3b"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_TIMEOUT = 30
+EMAIL_SENDGRID = 'support.05@fin.com.sa'

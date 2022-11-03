@@ -87,3 +87,6 @@ weasyprint==57.0
 webencodings==0.5.1
 wrapt 
 zopfli==0.2.1
+django-sendgrid-v5
+sendgrid
+django_mailjet
