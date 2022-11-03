@@ -199,7 +199,7 @@ def member_join(request, event_id):
 
     import os
     os.system('python manage.py sitemessage_send_scheduled')
-    # EventMember.objects.create(event=event, user=request.user)
+    EventMember.objects.create(event=event, user=request.user)
     Newsletter.objects.create(user=request.user, email=request.user.email, name=request.user.username)
     # schedule_email(message=f'تم تسجيلك في دورة {event.title} بنجاح', email=email,sender=User.objects.get(id=1))
     return redirect(event.get_absolute_url())
