@@ -1,0 +1,207 @@
+<!-- cal/templates/cal/base.html -->
+
+{% load static %}
+<!doctype html>
+<html lang="en" >
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/calender.css' %}">
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/main1.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/course.css' %}">
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الملتقى المهني العاشر بجامعة الملك عبدالعزيز</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+        <link rel="stylesheet" href="{% static 'css/accounts.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <!-- Animation -->
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <!-- magnific -->
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+    <!-- carousel -->
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+    <!-- isotop -->
+    <link rel="stylesheet" href="{% static 'assets/css/isotop.css' %}">
+    <!-- ico fonts -->
+    <link rel="stylesheet" href="{% static 'assets/css/xsIcon.css' %}">
+    <!-- Template styles-->
+    <link rel="stylesheet" href="{% static 'assets/css/style-v3.css' %}">
+    <!-- Responsive styles-->
+    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+    {% comment %} <link href="~/css/site.css" rel="stylesheet" /> {% endcomment %}
+    <link rel="icon" type="image/png" href="{% static 'assets/images/favicon.ico' %}">
+</head>
+<body>
+  <header id="header" class="header header-classic" dir="rtl">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <!-- logo-->
+            <a class="navbar-brand" href="{% url 'calendarapp:calendars'  %}">
+                <img src="{% static 'assets/images/logos/logo-v3.png' %}" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><i class="icon icon-menu"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="ts-scroll" href="#Main">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="ts-scroll" href="#AboutUs">عن الملتقى</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="ts-scroll" href="#Contact">للتواصل</a>
+                    </li>
+
+                   
+
+                    {% comment %} <li class="header-ticket nav-item">
+                        <a href="#popup_DeptRegister" class="ticket-btn btn ts-image-popup" data-effect="mfp-zoom-in">
+                            تسجيل الجهات
+                        </a>
+                    </li> {% endcomment %}
+
+                    {% if user.is_authenticated %}
+                    <li class="header-ticket nav-item">
+                      <a class="ticket-btn btn ts-image-popup" href="#">({{ user.username }})</a>
+                    </li>
+                    <li class="header-ticket nav-item">
+                      <a class="ticket-btn btn ts-image-popup" href="{% url 'accounts:signout' %}">Logout</a>
+                    </li>
+                      {% else %}
+                        <a href="#popup_register" class="ticket-btn btn ts-image-popup" data-effect="mfp-zoom-in">
+                          تسجيل الزوار
+                        </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div><!-- container end-->
+</header>
+<!-- <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <div class="navbar-header">
+              {% comment %} <a class="navbar-brand" href="{% url 'onlinecourse:index' %}">Online Course</a> {% endcomment %}
+              <a class="navbar-brand" href="{% url 'calendarapp:calendars' %}">All events</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+            <li>
+                <a class="btn btn-link" href="#">({{ user.username }})</a>
+                <a class="btn btn-link" href="{% url 'accounts:signout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li>
+                <form class="form-inline" action="{% url 'accounts:signin' %}" method="post">
+                    {% csrf_token %}
+                    <div class="input-group">
+                       
+                        <button class="btn btn-primary" type="submit">Login</button>
+                        <a class="btn btn-link" href="{% url 'accounts:signin' %}">Sign Up</a>
+                    </div>
+                </form>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>-->
+<hr>
+    {% comment %} {% block calendar %} {% endcomment %}
+
+    {% comment %} {% endblock calendar %} {% endcomment %}
+  {% block content %}
+
+  {% endblock %}
+  <br>
+  <div class="footer-area">
+
+    <!-- ts-book-seat start-->
+    <hr>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="logo-box">
+                    
+                    <span>تنظيم الدورات بالتعاون مع</span>
+                        <img src="{% static 'assets/images/logos/MFTC-logo.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div><!-- container end-->
+    </section>
+    <!-- book seat  end-->
+    <!-- footer start-->
+    <footer class="ts-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="ts-footer-social text-center mb-30">
+                        <ul>
+                            <li>
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            <li>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="copyright-text text-center">
+                        <p>
+                            جميع الحقوق محفوظة لوكالة عمادة شؤون الطلاب لشؤون الخريجين بالتعاون مع المركز الإداري والمالي للتدريب 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer end-->
+    <div class="BackTo">
+        <a href="#" class="fa fa-angle-up" aria-hidden="true"></a>
+    </div>
+</div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+
+    
+  {% block script %}
+  {% endblock %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

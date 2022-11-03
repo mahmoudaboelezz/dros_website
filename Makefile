@@ -21,3 +21,9 @@ build:
 	docker compose build
 up:
 	docker-compose up -d
+newsletters:
+	cd website && python manage.py sitemessage_send_scheduled
+translate:
+	cd website && python manage.py makemessages -l en
+	cd website && python manage.py makemessages -l ar
+	cd website && python manage.py compilemessages

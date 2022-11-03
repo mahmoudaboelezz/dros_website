@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="clearfix">
+    {% if request.user.is_staff %}
+    <a class="btn btn-info right mr-2" href="{% url 'calendarapp:event_new' %}"> أضافة دورة جديدة </a>
+    {% endif %}
+</div>
+<div class="container">
+    <div>
+        
+        {{ calendar }}</table>
+    </div>
+</div>
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      direction: rtl;
+    }
+    nav.navbar.navbar-light.bg-light .container-fluid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    ul,
+    ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav.navbar.navbar-light.bg-light {
+      background: gray;
+      padding: 15px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      text-transform: capitalize;
+    }
+
+    nav.navbar ul.nav.navbar-nav.navbar-right {
+      display: flex;
+      align-items: center;
+      column-gap: 15px;
+    }
+
+    nav.navbar ul.nav.navbar-nav.navbar-right li a {
+      background: #222;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .table-content-araea {
+      padding: 40px 0;
+    }
+
+    @media (min-width: 1101px) {
+      .container {
+        width: 1100px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .container {
+        padding: 0 12px;
+      }
+      .table-tr a {
+        display: inline-block;
+      }
+      .table-tr ul {
+        width: 100%;
+      }
+    }
+
+    .table-content-araea table.table.calendar {
+      background: #cfcfcfcc;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      empty-cells: hide;
+      width: 100%;
+    }
+
+    tr.table-title th {
+      background: #272955;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+    }
+    tr.table-tr th {
+      background: #fff;
+      padding: 20px 0;
+      border: 1px solid #27295570;
+      border-radius: 6px;
+      color: #272955;
+    }
+
+    tr.table-tr td {
+      background: #fff;
+      padding: 20px 0;
+      text-align: center;
+      color: #000;
+      border: 1px solid #27295570;
+      border-radius: 6px;
+    }
+
+    .pages-links.clearfix {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .pages-links.clearfix .btn {
+      background: #272955;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: #fff;
+      margin: 0 5px;
+    }
+    .navbar-header {
+      color: #fff;
+      font-weight: bold;
+    }
+  </style>
+  
+{% endblock %}
