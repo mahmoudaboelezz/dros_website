@@ -41,9 +41,9 @@ register_messenger_objects(
 #         use_tls=True,
 # )
     SMTPMessenger(
-        'admin@aboelezz.com',
+        'support.05@fin.com.sa',
         'apikey',
-        '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',
+        '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',
         'smtp.sendgrid.net',
         '465',
         use_ssl=True,
