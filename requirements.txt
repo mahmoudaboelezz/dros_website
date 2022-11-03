@@ -1,55 +1,89 @@
-asgiref==3.5.2
-astroid==2.11.7
-black==22.6.0
+asgiref @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/22/46/4d/e9d170f76cad59b81e4568f6b37cce88f46df63c197e476a1020862182/asgiref-3.5.2-py3-none-any.whl
+astroid @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/06/d5/8d/5f39226e8657f63d020bbadd213d5fad782e99ed9d3c2e7ac6772a88f4/astroid-2.11.7-py3-none-any.whl
+black @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/fb/a6/45/0a25cda0ddf0c9449f9e1cbe10d49c46e6afa325b92348dcb523dedaff/black-22.6.0-cp310-cp310-win_amd64.whl
+Brotli==1.0.9
 CacheControl==0.12.11
 cachy==0.3.0
+cairocffi==1.4.0
+CairoSVG==2.5.2
 certifi==2022.6.15
+cffi==1.15.1
 charset-normalizer==2.1.1
 cleo==0.8.1
-click==8.1.3
+click @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/63/f3/4c/2270b95f4d37b9ea73cd401abe68b6e9ede30380533cd4e7118a8e3aa3/click-8.1.3-py3-none-any.whl
 clikit==0.6.2
-colorama==0.4.5
+colorama @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/c2/16/90/5bd8e7ca5465caa39fb4befd804a6c8a0a281f8f290c3387c173072719/colorama-0.4.5-py2.py3-none-any.whl
 crashtest==0.3.1
-dill==0.3.5.1
+crispy-bootstrap5==0.6
+cssselect2==0.7.0
+defusedxml==0.7.1
+dill @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/f7/b9/8c/cca9e9031d347991b7bfc8345ce044a4ec65e0990c95f8297d8177affb/dill-0.3.5.1-py2.py3-none-any.whl
 distlib==0.3.5
-Django==4.1
+Django @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/f6/42/55/34bad728e835f7d80666fd1fdc5adfb229adc3af1eb00ab2e9b80d1c9d/Django-4.1-py3-none-any.whl
+django-crispy-forms==1.14.0
+django-etc==1.4.0
+django-jet==1.0.8
+django-qr-code==3.1.1
+django-sitemessage==1.3.4
 filelock==3.8.0
+fonttools==4.38.0
+google-api-python-client==1.4.1
 html5lib==1.1
+httplib2 @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/6d/fa/29/3ac62fb971f849ceabf2f0e838c2a518debee9f5dbfa1617b8bde2707b/httplib2-0.20.4-py3-none-any.whl
 idna==3.3
-isort==5.10.1
+install==1.3.5
+isort @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/12/e3/f1/e8e484225dcc659de6e4ac34a4ad996cb71f36119e54e71462cc7ad7e8/isort-5.10.1-py3-none-any.whl
 keyring==23.8.2
-lazy-object-proxy==1.7.1
+lazy-object-proxy @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/f1/54/af/30e73b11958f4d66865f8c912edc95006ede6b68ea16dc897ed295e69b/lazy_object_proxy-1.7.1-cp310-cp310-win_amd64.whl
 lockfile==0.12.2
-mccabe==0.7.0
+lxml==4.9.1
+mccabe @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/6e/13/d3/27dd3d81419a63f54cee1343db4375f63135b517d83e52d7447875f739/mccabe-0.7.0-py2.py3-none-any.whl
 msgpack==1.0.4
-mypy-extensions==0.4.3
+mypy-extensions @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/2f/c6/09/3e1afdcb75322c65b786e63cd7e879b6be3db36dea78ca376db5483ae4/mypy_extensions-0.4.3-py2.py3-none-any.whl
+mysqlclient @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/9d/ef/d8/3ec3d498081ddd298839b15172367e1d603e40cbe4fc2f7e92e18fc1d8/mysqlclient-2.1.1-cp310-cp310-win_amd64.whl
+oauth2client @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/17/37/ab/79402df138887231ef8d3a73688d3e5c616c6432dd5d6693e7a6f229db/oauth2client-4.1.3-py2.py3-none-any.whl
 packaging==20.9
 pastel==0.2.1
-pathspec==0.9.0
+pathspec @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/48/a0/9f/f5128d9e11d591bca7a942dd80ec44f9b2de8294775c68e0b99beeef93/pathspec-0.9.0-py2.py3-none-any.whl
 pexpect==4.8.0
-Pillow==9.2.0
-pip==22.2.1
+Pillow @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/76/ad/b0/19bb0a44753d499044a5023a462de0f52356e8d6a0d58af7bdb18e789f/Pillow-9.2.0-cp310-cp310-win_amd64.whl
 pkginfo==1.8.3
 platformdirs==2.5.2
-poetry==1.1.14
+poetry==1.1.15
 poetry-core==1.0.8
-psycopg2==2.9.3
+psycopg2 @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/12/04/46/faee961478866aad853f4f8d4401c01c994f024b1976e3112a1fcb8fc9/psycopg2-2.9.3-cp310-cp310-win_amd64.whl
 ptyprocess==0.7.0
+pyasn1 @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/c2/76/ab/a9803cfd0691d31abaeaaf0c6477e76f673b71f11a2959d0ce3ea20775/pyasn1-0.4.8-py2.py3-none-any.whl
+pyasn1-modules @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/16/bd/80/44c2051a4b84112a472b7a8d0cf0f817e818771f012d02f042b684a05d/pyasn1_modules-0.2.8-py2.py3-none-any.whl
+pycparser==2.21
+pydantic==1.10.2
+pydyf==0.5.0
 pylev==1.4.0
-pylint==2.14.5
+pylint @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/7e/0e/12/03bb68cf5cbe08a52a94bf43043bfc5491385802ee76d0e5de5fc0852e/pylint-2.14.5-py3-none-any.whl
 pyparsing==3.0.9
-python-dotenv==0.20.0
+pyphen==0.13.0
+python-dotenv @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/03/b3/0a/614098987b7913fdcbdc5e81af3d9b7deecbb2d3802ad78521603deb1e/python_dotenv-0.20.0-py3-none-any.whl
+pytz==2022.6
 pywin32-ctypes==0.2.0
+qrcode==7.3.1
+reportlab==3.6.12
 requests==2.28.1
 requests-toolbelt==0.9.1
-setuptools==63.2.0
+rsa @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/4c/5f/b8/91cdc2a62c55059bdc352db73629eed1bc45fe31b022d51d8784c9b92c/rsa-4.9-py3-none-any.whl
+segno==1.5.2
 shellingham==1.5.0
 six==1.16.0
-sqlparse==0.4.2
-tomli==2.0.1
+sqlparse @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/10/f5/22/c9c991a71e27c4d8f69907d92cce74a369cbb3183dc4a6d27e2ae4ab0b/sqlparse-0.4.2-py3-none-any.whl
+svglib==1.4.1
+tinycss2==1.2.1
+tomli @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/62/12/b6/6db9ebb9c8e1a6c5aa8a92ae73098d8119816b5e8507490916621bc305/tomli-2.0.1-py3-none-any.whl
 tomlkit==0.11.4
-tzdata==2022.2
-urllib3==1.26.11
+typing_extensions==4.4.0
+tzdata @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/03/f4/0f/14aae56c1b9516c4637868949244c42a07b59b59c7e7e643451ea6ee1e/tzdata-2022.2-py2.py3-none-any.whl
+uritemplate @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/2a/d6/11/cd290afd2d0cea58f6e23668fa9814ba18c6fa968dfbd7d280a2f76dc6/uritemplate-4.1.1-py2.py3-none-any.whl
+urllib3==1.26.12
 virtualenv==20.16.3
+weasyprint==57.0
 webencodings==0.5.1
-wrapt==1.14.1
+wrapt @ file:///C:/Users/Mahmoud/AppData/Local/pypoetry/Cache/artifacts/5f/cc/a7/198da407e2eda65d0b4df86e0fed9a1d66ae808535b8536ed205769acf/wrapt-1.14.1-cp310-cp310-win_amd64.whl
+zopfli==0.2.1
