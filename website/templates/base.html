@@ -88,13 +88,13 @@
 
                     {% if user.is_authenticated %}
                     <li class="header-ticket nav-item">
-                      <a class="ticket-btn btn ts-image-popup" href="#">({{ user.username }})</a>
+                      <a class="ticket-btn btn ts-image-popup" href="{% url 'calendarapp:calendar'  %}">({{ user.username }})</a>
                     </li>
                     <li class="header-ticket nav-item">
                       <a class="ticket-btn btn ts-image-popup" href="{% url 'accounts:signout' %}">Logout</a>
                     </li>
                       {% else %}
-                        <a href={% url 'calendarapp:calendar'  %}" class="ticket-btn btn ts-image-popup" data-effect="mfp-zoom-in">
+                        <a href="#popup_register" class="ticket-btn btn ts-image-popup" data-effect="mfp-zoom-in">
                           تسجيل الزوار
                         </a>
                         {% endif %}
