@@ -186,13 +186,15 @@ def member_join(request, event_id):
     # if already joined
     event = Event.objects.get(id=event_id)
     if EventMember.objects.filter(event=event_id, user=request.user).exists():
-        messages.info(request, "لقد قمت بالتسجيل مسبقاً في هذه الدورة")
+        messages.warning(request, "لقد قمت بالتسجيل مسبقاً في هذه الدورة")
+        
         # return to event details page
         return redirect(event.get_absolute_url())
     print("--------------User joined!-----------------")
     code = qr_generate(event, request.user)
     v_c = code.verfication_code
     c_l = code.get_absolute_url()
+    print(c_l)
     c_qr = code.image.url
     print(c_qr)
     email = request.user.email
