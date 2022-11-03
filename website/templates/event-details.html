@@ -9,7 +9,7 @@ Event Details
         {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-success" role="alert">
         <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
       </div>
     {% endfor %}
@@ -24,8 +24,8 @@ Event Details
         </div>
 
         <div class="clearfix">
-            <h3>Event Name: {{ event.title }}</h3>
-            <p>From <span style="color: gray;">{{ event.start_time }}</span> To <span style="color: gray;">{{ event.end_time }}</span></p>
+            <h3>اسم الدورة : {{ event.title }}</h3>
+            <p><span style="color: gray;">{{ event.start_time }} من </span><br> <span style="color: gray;">{{ event.end_time }} الي </span></p>
             <hr>
             <p>{{ event.description }}</p>
         </div>
