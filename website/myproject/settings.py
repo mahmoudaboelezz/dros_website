@@ -28,7 +28,8 @@ DEBUG = True
 
 # <HINT> add your cloud host here
 ALLOWED_HOSTS = ['aboelezz.com','https://aboelezz.com/','127.0.0.1','localhost']
-CSRF_TRUSTED_ORIGINS = ['https://aboelezz.com','https://udemy.aboelezz.com']
+CSRF_TRUSTED_ORIGINS = ['https://fin.aboelezz.com']
+# CSRF_TRUSTED_ORIGINS = ['https://aboelezz.com','https://udemy.aboelezz.com']
 
 
 # Application definition
