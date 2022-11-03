@@ -1,49 +1,64 @@
-// when document is ready, run this function
+(function () {
+	"use strict";
+
+	var treeviewMenu = $('.app-menu');
+
+	// Toggle Sidebar
+	$('[data-toggle="sidebar"]').click(function(event) {
+		event.preventDefault();
+		$('.app').toggleClass('sidenav-toggled');
+	});
+
+	// Activate sidebar treeview toggle
+	$("[data-toggle='treeview']").click(function(event) {
+		event.preventDefault();
+		if(!$(this).parent().hasClass('is-expanded')) {
+			treeviewMenu.find("[data-toggle='treeview']").parent().removeClass('is-expanded');
+		}
+		$(this).parent().toggleClass('is-expanded');
+	});
+
+	// Set initial active toggle
+	$("[data-toggle='treeview.'].is-expanded").parent().toggleClass('is-expanded');
+
+	//Activate bootstrip tooltips
+	$("[data-toggle='tooltip']").tooltip();
+
+})();
+
+
+// when the page is ready
 $(document).ready(function() {
-    // when collapse button is clicked, hide all other collapse buttons and show the one that was clicked
-    // buttun with class of 'collapse'
-    $('[data-toggle="collapse"]').on('click', function() {
-        // add class 'collapsed' to other collapse buttons except the one that was clicked
-        $('[data-toggle="collapse"]').not(this).addClass('collapsed');
-        $('[data-toggle="collapse"]').not(this).removeClass('active');
-        // add class active to the button that was clicked
-        $(this).toggleClass('active');
-        // set aria-expanded to false for all collapse buttons except the one that was clicked
-        $('[data-toggle="collapse"]').not(this).attr('aria-expanded', 'false');
-        
-        // get the data-target attribute of other collapse buttons except the one that was clicked
-        var target = $('[data-toggle="collapse"]').not(this)
-            .attr('data-target');
-        // hide the other collapse buttons except the one that was clicked
-        $(target).collapse('hide');
-        
-        
-    });
+	// add active class to element with href equal to current page
+	$('a[href="' + this.location.pathname + '"]').addClass('active');
+	// override the javascript alert function
+	
+	
+});
 
-
-    // when user click on button with class 'complete-lesson', run this function
-    $('.complete-lesson').on('click', function() {
-        // get the id of the lesson that was clicked
-        var lesson_id = $(this).attr('id');
-        // add class 'completed' to the button that was clicked and store in local storage with key of lesson_id
-        $(this).addClass('completed');
-        localStorage.setItem(lesson_id, 'completed');
-        // get [data-toggle="collapse"] that has class 'active' and and add class 'completed' to it
-        $('[data-toggle="collapse"].active').addClass('completed');
-    });
-    // if local storage has key of lesson_id, add class 'completed' to the button that was clicked
-    $('.complete-lesson').each(function() {
-        var lesson_id = $(this).attr('id');
-        if (localStorage.getItem(lesson_id) == 'completed') {
-            $(this).addClass('completed');
-            // get data-complete attribute of the button that was clicked and add class 'completed' to it
-            data_target = $(this).attr('data-complete');
-            console.log(data_target);
-            // get [data-toggle="collapse"] that has data-target attribute of data_target and add class 'completed' to it
-            $('[data-toggle="collapse"][data-target="' + data_target + '"]').addClass('completed');
-            
-        }
-    });
-
-
+// when the page is ready
+$(document).ready(function() {
+	// get button with id delete
+	var deleteButton = $('#delete');
+	// when the button is clicked
+	deleteButton.click(function() {
+		event.preventDefault();
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#d33',
+			cancelButtonColor: '#009688',
+			confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+			if (result.value) {
+				// if the user confirms, submit the form
+				console.log('submitting form');
+				$('#delete-form').submit();
+				console.log($('#delete-form'));
+			}
+		})
+		
+	})
 });

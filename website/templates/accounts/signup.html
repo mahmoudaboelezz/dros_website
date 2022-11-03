@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html lang="en">
+	{% load static %}
+
+        {% block content %}
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row justify-content-center">
+
+                        <div class="d-md-flex">
+
+                            </div>
+                            <div class="shadow p-3 mb-5 bg-body rounded text-center">
+                                <div class="row justify-content-center py-md-5">
+                                    <div class="col-lg-9">
+                                        <h3>أنشاء حساب جديد </h3>
+                                        <hr>
+                                        <form action="#" method="post" class="signup-form">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="label" for="email">البريد الإلكتروني</label>
+                                                        {{ form.email }}
+                                                        <span class="text-danger">{{ form.errors.email }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="label" for="username">الأسم كما يظهر في الشهادة</label>
+                                                        {{ form.username}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="label" for="password">كلمة المرور</label>
+                                                        {{ form.password1 }}
+                                                        <span class="text-danger">{{ form.errors.password1 }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="label" for="password">إعادة كلمة المرور</label>
+                                                        {{ form.password2 }}
+                                                        <span class="text-danger">{{ form.errors.password2 }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 my-4">
+                                                    <div class="form-group">
+                                                        <div class="w-100">
+                                                            <label class="checkbox-wrap checkbox-primary">
+                                                                أوافق علي الشروط والأحكام
+                                                                <input type="checkbox" checked />
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary">أنشاء حساب</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="w-100">
+                                            <p class="mt-4">لدي حساب بالفعل!<a href="{% url 'accounts:signin' %}">تسجيل الدخول</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+            
+        </section>
+        {% include 'base/js.html' %}
+        {% endblock content %}

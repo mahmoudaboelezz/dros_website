@@ -1,0 +1,40 @@
+<table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+    <thead>
+        <tr role="row">
+            <th style="width: 41.641px;" class='btn-danger'>Delete</th>
+            <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 41.641px;">SL</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 87.312px;">Course Name</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 87.312px;">Instructor</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 89.281px;">Start Time</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;">Total Enrollment</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        
+        
+        {% for course in course_list %}
+            <tr role="row" class="odd">
+                <td>
+                    <div class="row justify-content-center">
+                        {% if course.id %}
+                        <form action="{% url 'onlinecourse:delete_course' course.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="X" class='btn-outline-danger border-end border-danger rounded-circle' id='delete'>
+                        </form>
+                        
+                    </div>
+            </td>
+                <td class="sorting_1"><a href="{% url 'onlinecourse:course_detail' course.id %}">{{ forloop.counter }}</a></td>
+                <td><a href="{% url 'onlinecourse:course_detail' course.id %}">{{ course.name }}</a></td>
+                {% endif %}
+                <td>{{ course.instructor }}</td>
+                <td>{{ course.pub_date }}</td>
+                <td>{{course.total_enrollment}}</td>
+                <td>{{course.price}}</td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

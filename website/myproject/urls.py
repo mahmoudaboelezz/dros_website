@@ -13,12 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.conf import settings
+from .views import DashboardView,error_404_view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('onlinecourse/', include('onlinecourse.urls')),
+    path("admin/", DashboardView.as_view(), name="dashboard"),
+    path('database/', admin.site.urls),
+    # path('', include('onlinecourse.urls')),
+    path('', include('calendarapp.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('newsletter/', include('newsletter.urls')),
+    path('404/', error_404_view, name='404'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

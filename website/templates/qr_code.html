@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% if request.user.is_staff %}
+    {% if messages %}
+    <ul class="messages" style='text-align:center; list-style-type: none;'>
+        {% for message in messages %}
+        <div class="alert alert-info role="alert">
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          </div>
+        
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endif %}
+<div class="container" style='text-align:center;'>
+    
+    <div class="alert alert-dark" role="alert">
+    <h1>{{qr}} التذكرة الخاصة بك</h1>
+</div>
+
+    <h2>شكرا لتسجيلك معنا</h2>
+    {% comment %} <span id='qr'>
+        {{qr.qr_code|safe}}
+    </span> {% endcomment %}
+    <img src="{{qr.image.url}}" alt="">
+    <h5>{{qr.event}}</h5>
+</div>
+
+{% endblock %}
