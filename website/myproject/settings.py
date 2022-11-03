@@ -202,17 +202,30 @@ MEDIA_URL = '/media/'
 # SENDGRID_API_KEY = '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'
 # SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 # EMAIL_SENDGRID = "egblack2030@gmail.com"
+# EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+# SENDGRID_API_KEY = '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'
+# SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+# EMAIL_SENDGRID = "support.05@fin.com.sa"
 
 # '1083b044e1620499d7de434658c225a9',
 #         '74c4918ed8e36914467e19c403021e3b',
 #         'in-v3.mailjet.com',
 
+# EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
+# EMAIL_HOST = 'in-v3.mailjet.com'
+# MAILJET_API_KEY = "1083b044e1620499d7de434658c225a9"
+# MAILJET_API_SECRET = "74c4918ed8e36914467e19c403021e3b"
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
+# EMAIL_TIMEOUT = 30
+# EMAIL_SENDGRID = 'admin@aboelezz.com'
 EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
 EMAIL_HOST = 'in-v3.mailjet.com'
-MAILJET_API_KEY = "1083b044e1620499d7de434658c225a9"
-MAILJET_API_SECRET = "74c4918ed8e36914467e19c403021e3b"
+MAILJET_API_KEY = "2985be46cda3360fbba4e1e78eb19db4"
+MAILJET_API_SECRET = "01722ccc5aba3a8f037e9eb4421ec821"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_TIMEOUT = 30
-EMAIL_SENDGRID = 'support.05@fin.com.sa'
+EMAIL_SENDGRID = 'admin@aboelezz.com'
