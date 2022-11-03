@@ -36,7 +36,7 @@ Event Details
             <a class="btn btn-success right" href="{% url 'calendarapp:add_eventmember' event.id %}"> أضافة عضو يدويا </a>
             {% else %}
             <a class="btn btn-success right" href="{% url 'calendarapp:member_join' event.id %}"> التسجيل في هذة الدورة </a>
-            <a class="btn btn-success right" href="{% url 'calendarapp:calendar' %}"> الأشتراك في دورة أخري</a>
+            <a class="btn btn-success left" href="{% url 'calendarapp:calendar' %}"> الأشتراك في دورة أخري</a>
             {% endif %}
         </div>
         {% if request.user.is_staff %}
