@@ -94,7 +94,7 @@
                       <a class="ticket-btn btn ts-image-popup" href="{% url 'accounts:signout' %}">Logout</a>
                     </li>
                       {% else %}
-                        <a href="#popup_register" class="ticket-btn btn ts-image-popup" data-effect="mfp-zoom-in">
+                        <a href={% url 'calendarapp:calendar'  %}" class="ticket-btn btn ts-image-popup" data-effect="mfp-zoom-in">
                           تسجيل الزوار
                         </a>
                         {% endif %}
