@@ -41,13 +41,21 @@ register_messenger_objects(
 #         use_tls=True,
 # )
     SMTPMessenger(
-        'support.05@fin.com.sa',
+        'mahmoud.sobhy@aboelezz.com',
         'apikey',
-        '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',
+        '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',
         'smtp.sendgrid.net',
         '465',
         use_ssl=True,
 )
+#     SMTPMessenger(
+#         'support.05@fin.com.sa',
+#         'apikey',
+#         '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',
+#         'smtp.sendgrid.net',
+#         '465',
+#         use_ssl=True,
+# )
 )# #Smtp Email for recovery password
 
 
