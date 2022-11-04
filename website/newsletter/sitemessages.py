@@ -32,7 +32,30 @@ class MyMessage(MessageBase):
 register_message_types(MyMessage)
     
 register_messenger_objects(
-
+#     SMTPMessenger(
+#         'admin@aboelezz.com',
+#         '1083b044e1620499d7de434658c225a9',
+#         '74c4918ed8e36914467e19c403021e3b',
+#         'in-v3.mailjet.com',
+#         '465',
+#         use_tls=True,
+# )
+#     SMTPMessenger(
+#         'mahmoud.sobhy@aboelezz.com',
+#         'apikey',
+#         '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',
+#         'smtp.sendgrid.net',
+#         '465',
+#         use_tls=True,
+# )
+    SMTPMessenger(
+        'egblack2030@gmail.com',
+        'apikey',
+        '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',
+        'smtp.sendgrid.net',
+        '465',
+        use_ssl=True,
+)
 )# #Smtp Email for recovery password
 
 

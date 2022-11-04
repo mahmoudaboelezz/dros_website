@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'calendarapp',
     'newsletter',
     'accounts',
-    'sitemessage',
+    # 'sitemessage',
     # 'controller'
 ]
 

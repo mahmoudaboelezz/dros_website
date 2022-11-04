@@ -109,3 +109,8 @@ def verify_url(request):
         if QRCode.objects.filter(verfication_code=verfication_code).exists():
             qr = QRCode.objects.get(verfication_code=verfication_code)
             return render(request,'qr_code.html',{'qr':qr})
+        
+        
+        
+# import application from site.website.myproject.wsgi
+
